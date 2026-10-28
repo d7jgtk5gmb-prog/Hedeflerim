@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17231d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hedeflerim">
+  <meta name="description" content="Günlük görevlerini ve uzun vadeli hedeflerini takip et.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Hedeflerim</title>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div>
+        <p class="eyebrow">KÜÇÜK ADIMLAR, DÜZENLİ İLERLEME</p>
+        <h1>Hedeflerim</h1>
+        <p id="today" class="muted"></p>
+      </div>
+      <div class="progress-ring" aria-label="Günlük ilerleme">
+        <strong id="progressPercent">0%</strong>
+        <span>bugün</span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="section-head">
+        <div><h2>Günlük görevler</h2><p class="muted" id="progressText">0 / 0 tamamlandı</p></div>
+      </div>
+      <div class="filters" role="group" aria-label="Görev filtreleri">
+        <button class="filter active" data-filter="all">Tümü</button>
+        <button class="filter" data-filter="open">Bekleyen</button>
+        <button class="filter" data-filter="done">Tamamlanan</button>
+      </div>
+      <div id="taskList" class="task-list"></div>
+      <form id="taskForm" class="add-form">
+        <input id="taskInput" maxlength="90" placeholder="Yeni bir görev ekle…" required>
+        <select id="taskCategory" aria-label="Kategori">
+          <option value="Kişisel">Kişisel</option>
+          <option value="Spor">Spor</option>
+          <option value="Müzik">Müzik</option>
+          <option value="Finans">Finans</option>
+          <option value="Okuma">Okuma</option>
+        </select>
+        <button class="primary" type="submit">Ekle</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div><h2>Uzun vadeli hedefler</h2><p class="muted">İlerleme yüzdesini istediğin zaman güncelle.</p></div>
+      </div>
+      <div id="goalList" class="goal-list"></div>
+      <form id="goalForm" class="add-form goal-add">
+        <input id="goalInput" maxlength="90" placeholder="Yeni bir hedef ekle…" required>
+        <button class="primary" type="submit">Hedef ekle</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>Verilerin bu cihazın tarayıcısında saklanır.</p>
+      <button id="resetDay" class="text-button">Bugünün görevlerini sıfırla</button>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
+  </script>
+</body>
+</html>
